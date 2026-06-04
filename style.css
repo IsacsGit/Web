@@ -1,4 +1,55 @@
 /* ==========================================================================
+   BUTTON UPGRADES (MAGNETIC HOVER PREP)
+   ========================================================================== */
+.btn-primary, .btn-secondary {
+    will-change: transform; /* Hardware acceleration for buttery magnetic hover */
+    transition: transform 0.1s cubic-bezier(0.2, 0, 0.2, 1), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+/* ==========================================================================
+   ADMIN TOAST NOTIFICATIONS (APPLE STYLE)
+   ========================================================================== */
+.admin-toast {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background: #1A1A1A;
+    color: #FFFFFF;
+    padding: 16px 24px;
+    border-radius: 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+    z-index: 9999;
+    transform: translateY(100px) scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.admin-toast.show {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.admin-toast.success {
+    border-left: 4px solid #22c55e;
+}
+
+.admin-toast.error {
+    border-left: 4px solid #ef4444;
+}
+
+/* Enhancing Table Rows for Admin */
+.admin-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+.admin-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* ==========================================================================
    REDESIGNED SUPPORT PAGE (CONCIERGE LAYOUT)
    ========================================================================== */
 .support-split-layout {
