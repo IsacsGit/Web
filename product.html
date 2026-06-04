@@ -9,43 +9,75 @@
 </head>
 <body>
 
-    <nav id="navbar" class="glass-nav">
-        <div class="nav-content">
-            <a href="index.html" class="logo">AURA</a>
-            <button class="btn-primary">Bag (0)</button>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">AURA</a>
+            <div class="nav-links">
+                <a href="index.html" class="active">Products</a>
+                <a href="studio.html">Studio</a>
+                <a href="support.html">Support</a>
+            </div>
+            <button class="btn-primary desktop-btn">Bag (0)</button>
+            <button class="mobile-toggle">☰</button>
         </div>
     </nav>
 
-    <main class="product-page fade-up">
-        <!-- Left: Gallery -->
-        <div class="product-gallery">
-            <div class="main-image">
-                <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=2070&auto=format&fit=crop" alt="Aura UI Kit">
+    <main class="product-layout reveal-up">
+        
+        <!-- Left Column: Gallery Grid -->
+        <div class="gallery-grid">
+            <div class="gallery-main">
+                <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=2070&auto=format&fit=crop" alt="Aura UI Kit Hero">
             </div>
-            <div class="sub-images">
-                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2000&auto=format&fit=crop" alt="Detail 1">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop" alt="Detail 2">
+            <div class="gallery-thumbs">
+                <div><img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2000&auto=format&fit=crop" alt="Detail 1"></div>
+                <div><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop" alt="Detail 2"></div>
+            </div>
+            <div class="gallery-main">
+                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2070&auto=format&fit=crop" alt="Aura UI Kit Setup">
             </div>
         </div>
 
-        <!-- Right: Sticky Details -->
-        <div class="product-details">
-            <div class="sticky-sidebar">
-                <h1>Aura UI Kit</h1>
-                <p class="product-price">$49.00</p>
-                <p class="product-desc">A comprehensive design system engineered for perfection. Includes over 200 meticulously crafted components, built for Framer and Figma.</p>
-                
-                <ul class="features-list">
-                    <li><span>Format</span> <span>.fig, .framer</span></li>
-                    <li><span>File Size</span> <span>124 MB</span></li>
-                    <li><span>Updates</span> <span>Lifetime Free</span></li>
-                </ul>
+        <!-- Right Column: Sticky Product Info -->
+        <div class="product-info">
+            <h1>Aura UI Kit</h1>
+            <p class="product-price-large">$49.00</p>
+            <p class="product-description">A comprehensive design system engineered for perfection. Includes over 200 meticulously crafted components, built specifically for Framer and Figma to accelerate your creative workflow.</p>
+            
+            <table class="specs-table">
+                <tr>
+                    <td>Formats</td>
+                    <td>.fig, .framer</td>
+                </tr>
+                <tr>
+                    <td>Components</td>
+                    <td>200+ Elements</td>
+                </tr>
+                <tr>
+                    <td>File Size</td>
+                    <td>124 MB</td>
+                </tr>
+                <tr>
+                    <td>License</td>
+                    <td>Commercial End-Use</td>
+                </tr>
+                <tr>
+                    <td>Updates</td>
+                    <td>Lifetime Free</td>
+                </tr>
+            </table>
 
-                <button class="btn-primary full-width">Purchase and Download</button>
-                <p class="secure-text">Secure payment powered by Stripe.</p>
-            </div>
+            <button class="btn-primary btn-block">Purchase and Download</button>
+            <p class="secure-notice">Secured by Stripe Checkout.</p>
         </div>
+
     </main>
+
+    <footer class="footer">
+        <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+            <p>&copy; 2024 Aura Digital Studio.</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
