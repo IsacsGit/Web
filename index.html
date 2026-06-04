@@ -5,86 +5,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aura | Premium Digital Assets</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Premium Font: Inter (mimics Apple's SF Pro) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Glassmorphic Navbar -->
     <nav id="navbar" class="glass-nav">
         <div class="nav-content">
             <a href="index.html" class="logo">AURA</a>
             <div class="nav-links desktop-only">
-                <a href="#">Products</a>
-                <a href="#">Studio</a>
-                <a href="#">Support</a>
+                <a href="index.html" class="active">Products</a>
+                <a href="studio.html">Studio</a>
+                <a href="support.html">Support</a>
             </div>
             <button class="btn-primary">Bag (0)</button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <header class="hero">
+        <div class="hero-glow"></div>
         <div class="hero-content fade-up">
             <div class="badge">
-                <span class="pulse-dot"></span> Aura UI Kit 2.0 is now available
+                <span class="pulse-dot"></span> Aura UI Kit 2.0 Available
             </div>
             <h1>Digital assets for the<br>modern workspace.</h1>
             <p>Meticulously crafted wallpapers, icon systems, and UI components designed to elevate your digital environment.</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn-primary">Explore Catalog</a>
+                <a href="studio.html" class="btn-secondary">Our Story</a>
+            </div>
         </div>
     </header>
 
-    <!-- Products Grid -->
-    <section class="products-section">
+    <section id="products" class="products-section">
         <div class="section-header fade-up">
             <h2>Latest Releases</h2>
+            <a href="#" class="view-all">View all →</a>
         </div>
         <div class="grid">
-            
-            <!-- Product Card 1 -->
             <a href="product.html" class="product-card fade-up">
                 <div class="card-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=2070&auto=format&fit=crop" alt="Aura UI Kit">
+                    <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=2070&auto=format&fit=crop" alt="Aura UI">
                 </div>
                 <div class="card-info">
                     <div>
                         <h3>Aura UI Kit</h3>
-                        <p>Framer Component</p>
+                        <p>Framer Component System</p>
                     </div>
                     <span class="price">$49</span>
                 </div>
             </a>
-
-            <!-- Product Card 2 -->
             <a href="product.html" class="product-card fade-up" style="transition-delay: 0.1s;">
                 <div class="card-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2000&auto=format&fit=crop" alt="Monolith Icons">
+                    <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2000&auto=format&fit=crop" alt="Icons">
                 </div>
                 <div class="card-info">
                     <div>
                         <h3>Monolith Icons</h3>
-                        <p>Icon System</p>
+                        <p>Vector Icon System</p>
                     </div>
                     <span class="price">$24</span>
                 </div>
             </a>
-
-            <!-- Product Card 3 -->
             <a href="product.html" class="product-card fade-up" style="transition-delay: 0.2s;">
                 <div class="card-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop" alt="Obsidian Wallpapers">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop" alt="Wallpapers">
                 </div>
                 <div class="card-info">
                     <div>
                         <h3>Obsidian</h3>
-                        <p>8K Wallpapers</p>
+                        <p>8K Desktop Wallpapers</p>
                     </div>
                     <span class="price">$12</span>
                 </div>
             </a>
-
         </div>
     </section>
+
+    <!-- NEW: Value Proposition / Bento Box -->
+    <section class="features-section fade-up">
+        <div class="section-header text-center">
+            <h2>Crafted with precision.</h2>
+            <p class="subtitle">Why top designers choose Aura assets.</p>
+        </div>
+        <div class="bento-grid">
+            <div class="bento-card">
+                <div class="icon">✦</div>
+                <h3>Pixel Perfect</h3>
+                <p>Every asset is snapped to a mathematical grid. No half-pixels, no blurry edges.</p>
+            </div>
+            <div class="bento-card">
+                <div class="icon">⟡</div>
+                <h3>Lifetime Updates</h3>
+                <p>When we improve a file or add new components, you get the update for free, forever.</p>
+            </div>
+            <div class="bento-card col-span-2">
+                <div class="icon">✹</div>
+                <h3>Engineered for modern tools</h3>
+                <p>Native files for Figma, Framer, and React. Not just exported PNGs, but living, editable design systems.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Premium Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>AURA</h2>
+                <p>Elevating digital workspaces.</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-column">
+                    <h4>Products</h4>
+                    <a href="#">UI Kits</a>
+                    <a href="#">Wallpapers</a>
+                    <a href="#">Iconography</a>
+                </div>
+                <div class="link-column">
+                    <h4>Company</h4>
+                    <a href="studio.html">Studio</a>
+                    <a href="#">License</a>
+                    <a href="support.html">Contact</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Aura Digital Studio. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
