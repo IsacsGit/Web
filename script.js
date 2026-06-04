@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
         { id: 3, title: "Obsidian", category: "8K Desktop Wallpapers", price: "$12", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop" }
     ];
 
-    // Initialize database if empty
     if (!localStorage.getItem('silfver_products')) {
         localStorage.setItem('silfver_products', JSON.stringify(defaultProducts));
     }
@@ -23,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (productGrid) {
         productGrid.innerHTML = ''; // Clear loading state
         products.forEach((product, index) => {
-            const delay = index * 0.1; // Staggered animation
+            const delay = index * 0.1; 
             const card = `
                 <a href="product.html" class="product-card reveal-up" style="transition-delay: ${delay}s">
                     <div class="product-image">
@@ -43,7 +42,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================================================
-    // 3. UI INTERACTIONS (Nav, Mobile Menu, Reveals)
+    // 3. MAGNETIC BUTTON EFFECT (Premium Framer-style interaction)
+    // ==========================================================================
+    const magneticButtons = document.querySelectorAll('.btn-primary, .btn-secondary');
+    
+    magneticButtons.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            // Move button slightly towards cursor
+            btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.02)`;
+        });
+        
+        btn.addEventListener('mouseleave', () => {
+            // Snap back to original position
+            btn.style.transform = `translate(0px, 0px) scale(1)`;
+        });
+    });
+
+    // ==========================================================================
+    // 4. UI INTERACTIONS (Nav, Mobile Menu, Reveals)
     // ==========================================================================
     const navbar = document.querySelector('.navbar');
     let lastScrollY = window.scrollY;
@@ -87,20 +107,18 @@ document.addEventListener("DOMContentLoaded", () => {
     revealElements.forEach(el => revealOnScroll.observe(el));
 
     // ==========================================================================
-    // 4. FAQ ACCORDION LOGIC
+    // 5. FAQ ACCORDION LOGIC
     // ==========================================================================
     const faqTriggers = document.querySelectorAll('.faq-trigger');
     faqTriggers.forEach(trigger => {
         trigger.addEventListener('click', () => {
             const content = trigger.nextElementSibling;
-            
             document.querySelectorAll('.faq-content').forEach(item => {
                 if (item !== content) {
                     item.style.maxHeight = null;
                     item.previousElementSibling.classList.remove('active');
                 }
             });
-
             trigger.classList.toggle('active');
             if (trigger.classList.contains('active')) {
                 content.style.maxHeight = content.scrollHeight + "px";
@@ -111,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ==========================================================================
-    // 5. ADMIN PANEL LOGIC
+    // 6. ADMIN PANEL LOGIC & TOAST NOTIFICATIONS
     // ==========================================================================
     const loginForm = document.getElementById('admin-login-form');
     const adminDashboard = document.getElementById('admin-dashboard');
@@ -120,7 +138,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const addProductBtn = document.getElementById('btn-add-product');
     const logoutBtn = document.getElementById('btn-logout');
 
-    // Authentication Check
+    // Toast Notification System
+    function showToast(message, type = "success") {
+        const toast = document.createElement('div');
+        toast.className = `admin-toast ${type}`;
+        toast.innerText = message;
+        document.body.appendChild(toast);
+        
+        // Trigger reflow for animation
+        setTimeout(() => toast.classList.add('show'), 10);
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 400); // Wait for transition
+        }, 3000);
+    }
+
     if (loginForm) {
         if (sessionStorage.getItem('silfver_admin_auth') === 'true') {
             showDashboard();
@@ -135,6 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (user === 'Admin123' && pass === 'Admin123') {
                 sessionStorage.setItem('silfver_admin_auth', 'true');
                 showDashboard();
+                showToast("Successfully logged in.", "success");
             } else {
                 errorMsg.style.display = 'block';
                 setTimeout(() => errorMsg.style.display = 'none', 3000);
@@ -172,20 +205,19 @@ document.addEventListener("DOMContentLoaded", () => {
             adminTableBody.appendChild(tr);
         });
 
-        // Attach Delete Listeners
         document.querySelectorAll('.btn-delete').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const idx = e.target.getAttribute('data-index');
-                if (confirm('Are you sure you want to delete this product?')) {
+                if (confirm('Permanently delete this product from Silfver Design?')) {
                     products.splice(idx, 1);
                     localStorage.setItem('silfver_products', JSON.stringify(products));
                     renderAdminTable();
+                    showToast("Product successfully deleted.", "error");
                 }
             });
         });
     }
 
-    // Add New Product Prompt (Simple version without complex modals)
     if (addProductBtn) {
         addProductBtn.addEventListener('click', () => {
             const title = prompt("Enter Product Title (e.g., Nova UI Kit):");
@@ -196,7 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const newProduct = {
                 id: Date.now(),
-                title: title || "Untitled Product",
+                title: title,
                 category: category || "Uncategorized",
                 price: price || "$0",
                 image: image
@@ -205,6 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
             products.push(newProduct);
             localStorage.setItem('silfver_products', JSON.stringify(products));
             renderAdminTable();
+            showToast(`${title} added to catalog.`, "success");
         });
     }
 });
