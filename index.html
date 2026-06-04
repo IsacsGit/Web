@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura | Premium Digital Workspace</title>
+    <title>Silfver Design | Premium Digital Workspace</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- NAVIGATION -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">AURA</a>
+            <a href="index.html" class="nav-logo">SILFVER DESIGN</a>
             <div class="nav-links">
                 <a href="index.html" class="active">Products</a>
                 <a href="studio.html">Studio</a>
@@ -23,11 +22,10 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
     <header class="hero">
         <div class="hero-glow"></div>
         <div class="badge reveal-up">
-            <span class="dot"></span> Aura UI Kit 2.0 is now available
+            <span class="dot"></span> Silfver UI Kit 2.0 is now available
         </div>
         <h1 class="reveal-up delay-1">Digital assets for the<br>modern workspace.</h1>
         <p class="reveal-up delay-2">Meticulously crafted wallpapers, icon systems, and UI components designed to elevate your digital environment.</p>
@@ -37,55 +35,18 @@
         </div>
     </header>
 
-    <!-- PRODUCT GRID -->
     <section id="products" class="section-container">
         <div class="section-header reveal-up">
             <h2>Latest Releases</h2>
         </div>
-        <div class="grid-3">
-            <!-- Product 1 -->
-            <a href="product.html" class="product-card reveal-up">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=2070&auto=format&fit=crop" alt="Aura UI Kit">
-                </div>
-                <div class="product-meta">
-                    <div>
-                        <h3>Aura UI Kit</h3>
-                        <p>Framer Component System</p>
-                    </div>
-                    <span class="product-price">$49</span>
-                </div>
-            </a>
-            <!-- Product 2 -->
-            <a href="product.html" class="product-card reveal-up delay-1">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2000&auto=format&fit=crop" alt="Monolith Icons">
-                </div>
-                <div class="product-meta">
-                    <div>
-                        <h3>Monolith Icons</h3>
-                        <p>Vector Icon System</p>
-                    </div>
-                    <span class="product-price">$24</span>
-                </div>
-            </a>
-            <!-- Product 3 -->
-            <a href="product.html" class="product-card reveal-up delay-2">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop" alt="Obsidian Wallpapers">
-                </div>
-                <div class="product-meta">
-                    <div>
-                        <h3>Obsidian</h3>
-                        <p>8K Desktop Wallpapers</p>
-                    </div>
-                    <span class="product-price">$12</span>
-                </div>
-            </a>
+        <!-- IMPORTANT: This grid is now populated automatically by script.js based on the Admin Dashboard -->
+        <div id="dynamic-product-grid" class="grid-3">
+            <!-- Loading state -->
+            <p style="color: var(--color-tertiary);">Loading catalog...</p>
         </div>
     </section>
 
-    <!-- BENTO FEATURES GRID -->
+    <!-- Bento Features Grid (Remains the same as before, just updated naming) -->
     <section class="section-container">
         <div class="section-header text-center reveal-up">
             <h2>Crafted with absolute precision.</h2>
@@ -99,50 +60,33 @@
             <div class="bento-item reveal-up delay-1">
                 <div class="bento-icon">⟡</div>
                 <h3>Lifetime Updates</h3>
-                <p>When we improve a file or add new components, you get the update for free.</p>
+                <p>When we improve a file, you get the update for free.</p>
             </div>
             <div class="bento-item bento-large reveal-up delay-2">
                 <div class="bento-icon">✹</div>
                 <h3>Engineered for modern tools</h3>
-                <p>Native files for Figma, Framer, and React. Not just exported PNGs, but living, editable design systems ready to be deployed instantly into your workflow.</p>
+                <p>Native files for Figma, Framer, and React. Not just exported PNGs, but living, editable design systems ready to be deployed instantly.</p>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-brand">
-                <h2>AURA</h2>
+                <h2>SILFVER DESIGN</h2>
                 <p>Elevating digital workspaces with uncompromising design standards.</p>
-            </div>
-            <div class="footer-nav">
-                <h4>Products</h4>
-                <ul>
-                    <li><a href="#">Aura UI Kit</a></li>
-                    <li><a href="#">Monolith Icons</a></li>
-                    <li><a href="#">Obsidian Walls</a></li>
-                </ul>
             </div>
             <div class="footer-nav">
                 <h4>Company</h4>
                 <ul>
                     <li><a href="studio.html">The Studio</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Twitter / X</a></li>
-                </ul>
-            </div>
-            <div class="footer-nav">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="#">License Agreement</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="support.html">Concierge</a></li>
+                    <li><a href="admin.html">Admin Login</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Aura Digital Studio. All rights reserved.</p>
+            <p>&copy; 2024 Silfver Design. All rights reserved.</p>
             <p>Designed in California. Built for the world.</p>
         </div>
     </footer>
