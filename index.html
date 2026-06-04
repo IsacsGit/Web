@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Silfver Design | Premium Digital Workspace</title>
-    <meta name="description" content="Meticulously crafted digital assets for the modern workspace.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     
-    <!-- ========================================== -->
-    <!-- ALL CSS STYLES                             -->
-    <!-- ========================================== -->
     <style>
+        /* --- CORE DESIGN SYSTEM --- */
         :root {
             --color-bg: #FAFAFA;
             --color-surface: #FFFFFF;
@@ -19,12 +16,10 @@
             --color-tertiary: #A3A3A3;
             --color-border: rgba(0, 0, 0, 0.08);
             --color-border-hover: rgba(0, 0, 0, 0.15);
-            
             --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
             --transition-fast: 0.2s var(--ease-apple);
             --transition-medium: 0.4s var(--ease-apple);
             --transition-slow: 0.8s var(--ease-apple);
-
             --shadow-sm: 0 2px 8px -2px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 16px -4px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
             --shadow-float: 0 24px 48px -12px rgba(0, 0, 0, 0.12);
@@ -35,42 +30,47 @@
         body {
             background-color: var(--color-bg);
             color: var(--color-primary);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             -webkit-font-smoothing: antialiased;
             line-height: 1.6;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
         a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
         ul { list-style: none; }
         img { max-width: 100%; display: block; }
 
-        /* SPA VIEW LOGIC */
-        .app-view { display: none; opacity: 0; }
-        .app-view.active { display: block; animation: fadeInView 0.5s var(--ease-apple) forwards; }
-        @keyframes fadeInView { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* --- SPA VIEW LOGIC (Failsafe setup) --- */
+        .app-view { display: none; }
+        .app-view.active { 
+            display: block; 
+            animation: fadeInView 0.5s var(--ease-apple) forwards; 
+        }
+        @keyframes fadeInView { 
+            0% { opacity: 0; transform: translateY(15px); } 
+            100% { opacity: 1; transform: translateY(0); } 
+        }
 
-        /* NAVBAR */
+        /* --- NAVBAR --- */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; height: 72px;
             background: rgba(250, 250, 250, 0.7); backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            border-bottom: 1px solid var(--color-border); z-index: 1000;
-            transition: transform var(--transition-medium);
+            -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid var(--color-border); 
+            z-index: 1000; transition: transform var(--transition-medium);
         }
         .navbar.hidden { transform: translateY(-100%); }
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 100%; display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { font-weight: 600; font-size: 1.125rem; letter-spacing: -0.02em; z-index: 1001; }
         .nav-links { display: flex; gap: 40px; }
-        .nav-links a { font-size: 0.875rem; font-weight: 500; color: var(--color-secondary); }
+        .nav-links a { font-size: 0.875rem; font-weight: 500; color: var(--color-secondary); cursor: pointer; }
         .nav-links a:hover, .nav-links a.active { color: var(--color-primary); }
-        .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; z-index: 1001; }
 
-        /* BUTTONS */
+        /* --- BUTTONS --- */
         .btn-primary, .btn-secondary, .btn-sm {
             display: inline-flex; align-items: center; justify-content: center;
             border-radius: 100px; font-weight: 500; cursor: pointer;
-            will-change: transform; transition: transform 0.1s cubic-bezier(0.2, 0, 0.2, 1), box-shadow var(--transition-fast), background-color var(--transition-fast);
+            transition: all var(--transition-fast);
         }
         .btn-primary { background: var(--color-primary); color: var(--color-surface); padding: 12px 24px; font-size: 0.875rem; border: none; box-shadow: var(--shadow-sm); }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
@@ -78,24 +78,22 @@
         .btn-secondary:hover { background: var(--color-bg); border-color: var(--color-border-hover); }
         .btn-sm { padding: 8px 16px; font-size: 0.8rem; border-radius: 8px; border: none; }
 
-        /* HERO */
+        /* --- HERO --- */
         .hero { position: relative; padding: 240px 24px 160px; text-align: center; display: flex; flex-direction: column; align-items: center; overflow: hidden; }
-        .hero-glow { position: absolute; top: -30%; left: 50%; transform: translateX(-50%); width: 1000px; height: 1000px; background: radial-gradient(circle, rgba(0,0,0,0.04) 0%, transparent 50%); z-index: -1; pointer-events: none; }
         .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 100px; background: var(--color-surface); border: 1px solid var(--color-border); font-size: 0.75rem; font-weight: 500; margin-bottom: 40px; }
         .badge .dot { width: 6px; height: 6px; background-color: #22c55e; border-radius: 50%; box-shadow: 0 0 12px #22c55e; }
         .hero h1 { font-size: clamp(3rem, 6vw, 5.5rem); line-height: 1.05; font-weight: 600; letter-spacing: -0.04em; max-width: 900px; margin-bottom: 32px; }
         .hero p { font-size: clamp(1.125rem, 2vw, 1.375rem); color: var(--color-secondary); max-width: 600px; margin-bottom: 48px; }
         .hero-actions { display: flex; gap: 16px; }
 
-        /* GRIDS & LAYOUTS */
+        /* --- GRIDS & CARDS --- */
         .section-container { max-width: 1200px; margin: 0 auto; padding: 0 24px 160px; }
-        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
+        .section-header { margin-bottom: 48px; }
         .section-header h2 { font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 600; letter-spacing: -0.03em; }
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
         
-        /* PRODUCT CARDS */
         .product-card { display: flex; flex-direction: column; gap: 20px; cursor: pointer; }
-        .product-image { position: relative; aspect-ratio: 4/3; border-radius: 24px; overflow: hidden; background: var(--color-surface); border: 1px solid var(--color-border); transition: transform var(--transition-medium), box-shadow var(--transition-medium); }
+        .product-image { position: relative; aspect-ratio: 4/3; border-radius: 24px; overflow: hidden; background: var(--color-surface); border: 1px solid var(--color-border); transition: all var(--transition-medium); }
         .product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow); }
         .product-card:hover .product-image { transform: translateY(-8px); box-shadow: var(--shadow-float); border-color: var(--color-border-hover); }
         .product-card:hover .product-image img { transform: scale(1.05); }
@@ -104,7 +102,7 @@
         .product-meta p { font-size: 0.875rem; color: var(--color-secondary); margin-top: 4px; }
         .product-price { background: var(--color-surface); padding: 6px 12px; border-radius: 8px; font-size: 0.875rem; font-weight: 500; border: 1px solid var(--color-border); }
 
-        /* BENTO BOX */
+        /* --- BENTO BOX --- */
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
         .bento-item { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 32px; padding: 48px; display: flex; flex-direction: column; justify-content: space-between; transition: all var(--transition-medium); }
         .bento-item:hover { border-color: var(--color-border-hover); box-shadow: var(--shadow-md); }
@@ -113,68 +111,48 @@
         .bento-item h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 12px; }
         .bento-item p { color: var(--color-secondary); font-size: 1.05rem; }
 
-        /* PRODUCT DETAIL PAGE */
+        /* --- PRODUCT PAGE --- */
         .product-layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 80px; max-width: 1200px; margin: 160px auto; padding: 0 24px; }
-        .gallery-main { aspect-ratio: 4/3; border-radius: 32px; overflow: hidden; border: 1px solid var(--color-border); margin-bottom: 24px;}
+        .gallery-main { aspect-ratio: 4/3; border-radius: 32px; overflow: hidden; border: 1px solid var(--color-border); background: #f5f5f5; }
         .gallery-main img { width: 100%; height: 100%; object-fit: cover; }
         .product-info { position: sticky; top: 120px; align-self: start; }
-        .product-info h1 { font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 600; margin-bottom: 16px; line-height: 1.1; }
+        .product-info h1 { font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 600; margin-bottom: 16px; line-height: 1.1; letter-spacing: -0.03em;}
         .product-price-large { font-size: 1.5rem; color: var(--color-secondary); margin-bottom: 32px; }
         .specs-table { width: 100%; border-collapse: collapse; margin-bottom: 48px; border-top: 1px solid var(--color-border); }
         .specs-table td { padding: 24px 0; border-bottom: 1px solid var(--color-border); }
         .specs-table td:last-child { text-align: right; font-weight: 500; }
         .btn-block { width: 100%; padding: 20px; border-radius: 16px; font-size: 1rem; }
 
-        /* SUPPORT CONCIERGE PAGE */
+        /* --- SUPPORT & ADMIN --- */
         .support-split-layout { max-width: 1200px; margin: 180px auto 120px; padding: 0 24px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 120px; }
-        .support-title { font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 500; line-height: 1.05; margin-bottom: 24px; }
-        .support-desc { font-size: 1.125rem; color: var(--color-secondary); margin-bottom: 64px; }
-        .contact-block { margin-bottom: 40px; }
-        .contact-block h3 { font-size: 1.125rem; font-weight: 600; margin-bottom: 4px; }
-        .contact-block p { color: var(--color-secondary); font-size: 0.9rem; margin-bottom: 12px; }
-        .faq-heading { font-size: 1.5rem; font-weight: 500; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--color-primary); }
         .faq-trigger { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 32px 0; background: none; border: none; border-bottom: 1px solid var(--color-border); font-size: 1.125rem; font-weight: 500; cursor: pointer; text-align: left; }
         .faq-content { max-height: 0; overflow: hidden; transition: max-height var(--transition-medium); }
-        .faq-content p { padding: 24px 0; color: var(--color-secondary); }
-
-        /* ADMIN DASHBOARD */
+        
         .admin-view-bg { background: #0A0A0A; color: #FAFAFA; min-height: 100vh;}
-        .login-wrapper { height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% -20%, #222 0%, #0A0A0A 60%); }
-        .login-box { background: #111; border: 1px solid #222; padding: 48px; border-radius: 24px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 24px 48px rgba(0,0,0,0.5); }
+        .login-wrapper { height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .login-box { background: #111; border: 1px solid #222; padding: 48px; border-radius: 24px; width: 100%; max-width: 400px; text-align: center; }
         .login-box input { width: 100%; background: #000; border: 1px solid #333; color: #FFF; padding: 16px; border-radius: 12px; margin-bottom: 16px; outline: none; }
-        .admin-nav { display: flex; justify-content: space-between; padding: 20px 40px; border-bottom: 1px solid #222; background: #111; color: white; }
-        .admin-main { max-width: 1200px; margin: 40px auto; padding: 0 40px; color: white;}
-        .table-container { background: #111; border: 1px solid #222; border-radius: 16px; overflow: hidden; margin-top: 40px;}
-        .admin-table { width: 100%; border-collapse: collapse; text-align: left; }
+        .admin-table { width: 100%; border-collapse: collapse; text-align: left; margin-top: 40px; }
         .admin-table th, .admin-table td { padding: 20px 24px; border-bottom: 1px solid #222; }
-        .admin-thumb { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; }
-        .btn-delete { background: #ef4444; color: #FFF; }
-        .admin-toast { position: fixed; bottom: 40px; right: 40px; background: #1A1A1A; color: #FFF; padding: 16px 24px; border-radius: 16px; box-shadow: 0 16px 32px rgba(0,0,0,0.4); z-index: 9999; transform: translateY(100px); opacity: 0; transition: all 0.4s var(--ease-apple); border-left: 4px solid #22c55e;}
-        .admin-toast.show { transform: translateY(0); opacity: 1; }
-
-        /* FOOTER */
+        .admin-thumb { width: 64px; height: 48px; border-radius: 8px; object-fit: cover; }
+        
+        /* --- FOOTER --- */
         .footer { background: var(--color-surface); border-top: 1px solid var(--color-border); padding: 100px 24px 40px; }
         .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 64px; margin-bottom: 100px; }
         .footer-nav ul { display: flex; flex-direction: column; gap: 16px; margin-top: 24px;}
         .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 40px; border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; font-size: 0.875rem; color: var(--color-tertiary); }
 
-        /* ANIMATIONS */
-        .reveal-up { opacity: 0; transform: translateY(40px); transition: opacity var(--transition-slow), transform var(--transition-slow); }
-        .reveal-up.is-visible { opacity: 1; transform: translateY(0); }
-        .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; }
-
+        /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
-            .bento-grid { grid-template-columns: 1fr; } .bento-large { grid-column: span 1; }
+            .bento-grid { grid-template-columns: 1fr; } 
+            .bento-large { grid-column: span 1; }
             .product-layout, .support-split-layout, .footer-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; } .mobile-toggle { display: block; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ========================================== -->
-    <!-- GLOBAL NAVBAR                              -->
-    <!-- ========================================== -->
+    <!-- GLOBAL NAVBAR -->
     <nav class="navbar" id="main-nav">
         <div class="nav-container">
             <a href="#home" class="nav-logo">SILFVER DESIGN</a>
@@ -187,63 +165,57 @@
         </div>
     </nav>
 
-    <!-- ========================================== -->
-    <!-- VIEW: HOME                                 -->
-    <!-- ========================================== -->
+    <!-- VIEW: HOME (Starts Active) -->
     <main id="view-home" class="app-view active">
         <header class="hero">
-            <div class="hero-glow"></div>
-            <div class="badge reveal-up"><span class="dot"></span> Silfver UI Kit 2.0 is now available</div>
-            <h1 class="reveal-up delay-1">Digital assets for the<br>modern workspace.</h1>
-            <p class="reveal-up delay-2">Meticulously crafted wallpapers, icon systems, and UI components designed to elevate your digital environment.</p>
-            <div class="hero-actions reveal-up delay-1">
-                <a href="#home" class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Explore Catalog</a>
+            <div class="badge"><span class="dot"></span> Silfver UI Kit 2.0 is now available</div>
+            <h1>Digital assets for the<br>modern workspace.</h1>
+            <p>Meticulously crafted wallpapers, icon systems, and UI components designed to elevate your digital environment.</p>
+            <div class="hero-actions">
+                <a href="#home" class="btn-primary">Explore Catalog</a>
                 <a href="#studio" class="btn-secondary">Read the Manifesto</a>
             </div>
         </header>
 
         <section id="products" class="section-container">
-            <div class="section-header reveal-up"><h2>Latest Releases</h2></div>
+            <div class="section-header"><h2>Latest Releases</h2></div>
             <div id="dynamic-product-grid" class="grid-3">
-                <!-- Products Injected via JS -->
+                <!-- Products load here dynamically -->
             </div>
         </section>
 
         <section class="section-container">
-            <div class="section-header text-center reveal-up"><h2>Crafted with absolute precision.</h2></div>
+            <div class="section-header text-center"><h2>Crafted with absolute precision.</h2></div>
             <div class="bento-grid">
-                <div class="bento-item reveal-up">
+                <div class="bento-item">
                     <div class="bento-icon">✦</div>
                     <h3>Pixel Perfect</h3>
-                    <p>Every asset is snapped to a mathematical grid. No half-pixels, no blurry edges.</p>
+                    <p>Every asset is snapped to a mathematical grid. No blurry edges.</p>
                 </div>
-                <div class="bento-item reveal-up delay-1">
+                <div class="bento-item">
                     <div class="bento-icon">⟡</div>
                     <h3>Lifetime Updates</h3>
                     <p>When we improve a file, you get the update for free. No subscriptions.</p>
                 </div>
-                <div class="bento-item bento-large reveal-up delay-2">
+                <div class="bento-item bento-large">
                     <div class="bento-icon">✹</div>
                     <h3>Engineered for modern tools</h3>
-                    <p>Native files for Figma, Framer, and React. Not just exported PNGs, but living, editable design systems ready to be deployed instantly.</p>
+                    <p>Native files for Figma, Framer, and React. Editable design systems ready to be deployed instantly.</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- ========================================== -->
-    <!-- VIEW: PRODUCT DETAIL DYNAMIC               -->
-    <!-- ========================================== -->
+    <!-- VIEW: PRODUCT DETAIL -->
     <main id="view-product" class="app-view">
-        <div class="product-layout reveal-up">
+        <div class="product-layout">
             <div class="gallery-grid">
-                <div class="gallery-main"><img id="pd-image" src="" alt="Product Hero"></div>
+                <div class="gallery-main"><img id="pd-image" src="" alt="Product Image"></div>
             </div>
             <div class="product-info">
-                <h1 id="pd-title">Product Title</h1>
-                <p class="product-price-large" id="pd-price">$0.00</p>
-                <p class="product-description" style="margin-bottom: 40px; color: var(--color-secondary);">A comprehensive digital asset engineered for perfection, designed to accelerate your creative workflow seamlessly.</p>
-                
+                <h1 id="pd-title">Product</h1>
+                <p class="product-price-large" id="pd-price">$0</p>
+                <p style="margin-bottom: 40px; color: var(--color-secondary); font-size: 1.1rem;">A comprehensive digital asset engineered for perfection, designed to accelerate your creative workflow seamlessly.</p>
                 <table class="specs-table">
                     <tr><td>Formats</td><td>.fig, .framer, .svg</td></tr>
                     <tr><td>Updates</td><td>Lifetime Free</td></tr>
@@ -254,119 +226,97 @@
         </div>
     </main>
 
-    <!-- ========================================== -->
-    <!-- VIEW: STUDIO (ABOUT)                       -->
-    <!-- ========================================== -->
+    <!-- VIEW: STUDIO -->
     <main id="view-studio" class="app-view">
         <header class="hero" style="padding-bottom: 80px;">
-            <h1 class="reveal-up">We believe software should feel physical.</h1>
-            <p class="reveal-up delay-1">Silfver Design is an independent studio focused on bridging the gap between digital utility and physical craftsmanship.</p>
+            <h1>We believe software should feel physical.</h1>
+            <p>Silfver Design is an independent studio focused on bridging the gap between digital utility and physical craftsmanship.</p>
         </header>
-        <section class="section-container">
-            <div class="gallery-main reveal-up delay-2" style="margin-bottom: 80px;">
-                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2070&auto=format&fit=crop" alt="Our Workspace">
+        <section class="section-container" style="max-width: 800px;">
+            <div class="gallery-main" style="margin-bottom: 80px;">
+                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2070&auto=format&fit=crop" alt="Workspace">
             </div>
-            <div style="max-width: 800px; margin: 0 auto;">
-                <h2 style="font-size: 2rem; margin-bottom: 24px;" class="reveal-up">The Manifesto</h2>
-                <p style="font-size: 1.25rem; color: var(--color-secondary); margin-bottom: 24px;" class="reveal-up delay-1">In a world of rapidly produced templates and generic assets, we take a different approach. Every corner radius, every gradient stop, and every layer name is intentional.</p>
-                <p style="font-size: 1.25rem; color: var(--color-secondary);" class="reveal-up delay-2">Our goal is not to flood the market with volume, but to provide a curated selection of tools that make your personal workflow feel exceptionally premium.</p>
-            </div>
+            <h2 style="font-size: 2rem; margin-bottom: 24px;">The Manifesto</h2>
+            <p style="font-size: 1.25rem; color: var(--color-secondary); margin-bottom: 24px;">In a world of rapidly produced templates and generic assets, we take a different approach. Every corner radius, every gradient stop, and every layer name is intentional.</p>
+            <p style="font-size: 1.25rem; color: var(--color-secondary);">Our goal is not to flood the market with volume, but to provide a curated selection of tools that make your personal workflow feel exceptionally premium.</p>
         </section>
     </main>
 
-    <!-- ========================================== -->
-    <!-- VIEW: SUPPORT (CONCIERGE)                  -->
-    <!-- ========================================== -->
+    <!-- VIEW: SUPPORT -->
     <main id="view-support" class="app-view">
-        <div class="support-split-layout reveal-up">
+        <div class="support-split-layout">
             <div>
-                <h1 class="support-title">Concierge &<br>Support</h1>
-                <p class="support-desc">We build tools for perfectionists. If something isn't working flawlessly, our team is here to assist.</p>
-                <div class="contact-block">
-                    <h3>Email Support</h3>
-                    <p>Usually replies within 4 hours.</p>
-                    <a href="mailto:hello@silfverdesign.com" style="text-decoration: underline;">hello@silfverdesign.com ↗</a>
+                <h1 style="font-size: 3.5rem; margin-bottom: 24px; font-weight: 500; letter-spacing:-0.03em;">Concierge</h1>
+                <p style="font-size: 1.1rem; color: var(--color-secondary); margin-bottom: 48px;">We build tools for perfectionists. If something isn't working flawlessly, our team is here to assist.</p>
+                <div>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Email Support</h3>
+                    <p style="color: var(--color-secondary); margin-bottom: 8px;">Usually replies within 4 hours.</p>
+                    <a href="mailto:hello@silfverdesign.com" style="text-decoration: underline; font-weight: 500;">hello@silfverdesign.com ↗</a>
                 </div>
             </div>
             <div>
-                <h2 class="faq-heading">Frequently Asked</h2>
-                <div class="faq-item">
-                    <button class="faq-trigger">Accessing purchased files <span>+</span></button>
-                    <div class="faq-content"><p>After checkout, a secure download link is sent to your email immediately.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-trigger">Commercial licensing <span>+</span></button>
-                    <div class="faq-content"><p>Our license covers unlimited end-products. Reselling raw files is prohibited.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-trigger">Student discounts <span>+</span></button>
-                    <div class="faq-content"><p>Email us from a valid .edu address to receive a 50% discount code.</p></div>
-                </div>
+                <h2 style="font-size: 1.5rem; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--color-primary);">Frequently Asked</h2>
+                
+                <button class="faq-trigger">Accessing purchased files <span>+</span></button>
+                <div class="faq-content"><p>After checkout, a secure download link is sent to your email immediately.</p></div>
+                
+                <button class="faq-trigger">Commercial licensing <span>+</span></button>
+                <div class="faq-content"><p>Our license covers unlimited end-products. Reselling raw files is prohibited.</p></div>
+                
+                <button class="faq-trigger">Student discounts <span>+</span></button>
+                <div class="faq-content"><p>Email us from a valid .edu address to receive a 50% discount code.</p></div>
             </div>
         </div>
     </main>
 
-    <!-- ========================================== -->
-    <!-- VIEW: ADMIN DASHBOARD                      -->
-    <!-- ========================================== -->
+    <!-- VIEW: ADMIN DASHBOARD -->
     <main id="view-admin" class="app-view admin-view-bg">
         <div id="login-container" class="login-wrapper">
             <div class="login-box">
-                <h2>Silfver Admin</h2>
-                <p style="color: #888; margin-bottom: 24px;">Credentials: Admin123 / Admin123</p>
+                <h2 style="font-size: 1.5rem; margin-bottom: 8px;">Silfver Admin</h2>
+                <p style="color: #888; margin-bottom: 32px;">Credentials: Admin123 / Admin123</p>
                 <form id="admin-login-form">
                     <input type="text" id="admin-user" placeholder="Username" required>
                     <input type="password" id="admin-pass" placeholder="Password" required>
                     <p id="login-error" style="color: #ef4444; font-size: 0.875rem; display: none; margin-bottom: 16px;">Invalid credentials.</p>
                     <button type="submit" class="btn-primary" style="width: 100%;">Log In</button>
                 </form>
-                <a href="#home" style="display: block; margin-top: 24px; color: #666; font-size: 0.875rem;">← Back to Store</a>
+                <a href="#home" style="display: block; margin-top: 32px; color: #666; font-size: 0.875rem;">← Back to Store</a>
             </div>
         </div>
 
-        <div id="admin-dashboard" style="display: none;">
-            <nav class="admin-nav">
-                <div style="font-weight: 600;">SILFVER DASHBOARD</div>
+        <div id="admin-dashboard" style="display: none; padding: 40px;">
+            <div style="display: flex; justify-content: space-between; max-width: 1000px; margin: 0 auto 40px;">
+                <h1 style="font-weight: 500; font-size: 2rem;">Product Catalog</h1>
                 <div>
-                    <button id="btn-add-product" class="btn-primary btn-sm" style="margin-right: 12px;">+ New Product</button>
-                    <button id="btn-logout" class="btn-secondary btn-sm">Log Out</button>
+                    <button id="btn-add-product" class="btn-primary" style="margin-right: 12px; background: white; color: black;">+ New Product</button>
+                    <button id="btn-logout" class="btn-secondary" style="background: transparent; color: white;">Log Out</button>
                 </div>
-            </nav>
-            <div class="admin-main">
-                <h1 style="font-size: 2rem; margin-bottom: 8px;">Catalog</h1>
-                <p style="color: #888;">Manage your digital assets here.</p>
-                <div class="table-container">
-                    <table class="admin-table">
-                        <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Title</th>
-                                <th>Price</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-table-body"></tbody>
-                    </table>
-                </div>
+            </div>
+            <div style="max-width: 1000px; margin: 0 auto; background: #111; border: 1px solid #222; border-radius: 16px; overflow: hidden;">
+                <table class="admin-table">
+                    <thead>
+                        <tr><th style="color:#888;">Image</th><th style="color:#888;">Title</th><th style="color:#888;">Price</th><th style="color:#888;">Actions</th></tr>
+                    </thead>
+                    <tbody id="admin-table-body"></tbody>
+                </table>
             </div>
         </div>
     </main>
 
-    <!-- ========================================== -->
-    <!-- GLOBAL FOOTER                              -->
-    <!-- ========================================== -->
+    <!-- GLOBAL FOOTER -->
     <footer class="footer" id="main-footer">
         <div class="footer-grid">
             <div>
-                <h2 style="font-weight: 600; font-size: 1.5rem; margin-bottom: 8px;">SILFVER DESIGN</h2>
-                <p style="color: var(--color-secondary);">Elevating digital workspaces with uncompromising design standards.</p>
+                <h2 style="font-weight: 600; font-size: 1.25rem; margin-bottom: 16px;">SILFVER DESIGN</h2>
+                <p style="color: var(--color-secondary); font-size: 0.95rem;">Elevating digital workspaces with uncompromising design standards.</p>
             </div>
             <div class="footer-nav">
-                <h4 style="font-weight: 600;">Navigation</h4>
+                <h4 style="font-weight: 600; margin-bottom: 16px;">Navigation</h4>
                 <ul><li><a href="#home">Products</a></li><li><a href="#studio">Studio</a></li></ul>
             </div>
             <div class="footer-nav">
-                <h4 style="font-weight: 600;">Support</h4>
+                <h4 style="font-weight: 600; margin-bottom: 16px;">Support</h4>
                 <ul><li><a href="#support">Concierge</a></li><li><a href="#admin">Admin Login</a></li></ul>
             </div>
         </div>
@@ -376,102 +326,93 @@
         </div>
     </footer>
 
-    <!-- ========================================== -->
-    <!-- ALL JAVASCRIPT LOGIC                       -->
-    <!-- ========================================== -->
+    <!-- LOGIC -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             
-            // --- 1. LOCAL STORAGE DATABASE ---
+            // 1. BULLETPROOF DATABASE SYSTEM (Handles local file security blocks)
             const defaultProducts = [
                 { id: "101", title: "Silfver UI Kit", category: "Framer Component System", price: "$49", image: "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=2070&auto=format&fit=crop" },
                 { id: "102", title: "Monolith Icons", category: "Vector Icon System", price: "$24", image: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2000&auto=format&fit=crop" },
                 { id: "103", title: "Obsidian", category: "8K Desktop Wallpapers", price: "$12", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop" }
             ];
 
-            if (!localStorage.getItem('silfver_products')) {
-                localStorage.setItem('silfver_products', JSON.stringify(defaultProducts));
-            }
+            let products = [...defaultProducts];
+            let useLocalStorage = false;
 
-            let products = JSON.parse(localStorage.getItem('silfver_products'));
-
-            // --- 2. SINGLE PAGE APP ROUTER ---
-            function handleRoute() {
-                const hash = window.location.hash || '#home';
-                
-                // Hide all views
-                document.querySelectorAll('.app-view').forEach(el => el.classList.remove('active'));
-                
-                const nav = document.getElementById('main-nav');
-                const footer = document.getElementById('main-footer');
-                
-                // Handle Routing Logic
-                if (hash === '#admin') {
-                    document.getElementById('view-admin').classList.add('active');
-                    nav.style.display = 'none';
-                    footer.style.display = 'none';
-                    document.body.style.background = '#0A0A0A'; // Dark mode for admin
-                } else if (hash.startsWith('#product-')) {
-                    const productId = hash.replace('#product-', '');
-                    const product = products.find(p => p.id == productId);
-                    if(product) {
-                        document.getElementById('pd-title').innerText = product.title;
-                        document.getElementById('pd-price').innerText = product.price;
-                        document.getElementById('pd-image').src = product.image;
-                        document.getElementById('view-product').classList.add('active');
-                    } else {
-                        window.location.hash = '#home'; // fallback if not found
-                    }
-                    nav.style.display = 'block'; footer.style.display = 'block';
-                    document.body.style.background = '#FAFAFA';
-                } else {
-                    const targetView = document.getElementById('view-' + hash.replace('#', ''));
-                    if (targetView) targetView.classList.add('active');
-                    else document.getElementById('view-home').classList.add('active');
-                    
-                    nav.style.display = 'block'; footer.style.display = 'block';
-                    document.body.style.background = '#FAFAFA';
+            // Test if browser allows database access
+            try {
+                if (!localStorage.getItem('silfver_products')) {
+                    localStorage.setItem('silfver_products', JSON.stringify(defaultProducts));
                 }
-
-                window.scrollTo(0, 0); // Reset scroll on page change
-                initScrollReveals(); // Re-trigger animations
+                products = JSON.parse(localStorage.getItem('silfver_products'));
+                useLocalStorage = true;
+            } catch (error) {
+                console.warn("Running locally without database permissions. Using virtual memory mode.");
             }
 
-            window.addEventListener('hashchange', handleRoute);
-            
-            // --- 3. RENDER HOMEPAGE PRODUCTS ---
+            function saveDatabase() {
+                if(useLocalStorage) localStorage.setItem('silfver_products', JSON.stringify(products));
+            }
+
+            // 2. RENDER HOMEPAGE GRID
             function renderStorefront() {
                 const grid = document.getElementById('dynamic-product-grid');
                 grid.innerHTML = '';
-                products.forEach((product, index) => {
-                    const delay = index * 0.1; 
-                    const card = `
-                        <a href="#product-${product.id}" class="product-card reveal-up" style="transition-delay: ${delay}s">
+                products.forEach(product => {
+                    grid.insertAdjacentHTML('beforeend', `
+                        <a href="#product-${product.id}" class="product-card">
                             <div class="product-image"><img src="${product.image}" alt="${product.title}"></div>
                             <div class="product-meta">
                                 <div><h3>${product.title}</h3><p>${product.category}</p></div>
                                 <span class="product-price">${product.price}</span>
                             </div>
                         </a>
-                    `;
-                    grid.insertAdjacentHTML('beforeend', card);
+                    `);
                 });
             }
 
-            // --- 4. MAGNETIC BUTTONS ---
-            function initMagneticButtons() {
-                document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
-                    btn.addEventListener('mousemove', (e) => {
-                        const rect = btn.getBoundingClientRect();
-                        const x = e.clientX - rect.left - rect.width / 2;
-                        const y = e.clientY - rect.top - rect.height / 2;
-                        btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.02)`;
-                    });
-                    btn.addEventListener('mouseleave', () => btn.style.transform = `translate(0px, 0px) scale(1)`);
-                });
+            // 3. SINGLE PAGE ROUTER
+            function handleRoute() {
+                const hash = window.location.hash || '#home';
+                
+                // Hide all sections first
+                document.querySelectorAll('.app-view').forEach(el => el.classList.remove('active'));
+                
+                const nav = document.getElementById('main-nav');
+                const footer = document.getElementById('main-footer');
+                
+                if (hash === '#admin') {
+                    document.getElementById('view-admin').classList.add('active');
+                    nav.style.display = 'none'; footer.style.display = 'none';
+                    document.body.style.background = '#0A0A0A'; // Dark mode
+                } 
+                else if (hash.startsWith('#product-')) {
+                    const productId = hash.replace('#product-', '');
+                    const product = products.find(p => p.id == productId) || products[0];
+                    
+                    document.getElementById('pd-title').innerText = product.title;
+                    document.getElementById('pd-price').innerText = product.price;
+                    document.getElementById('pd-image').src = product.image;
+                    
+                    document.getElementById('view-product').classList.add('active');
+                    nav.style.display = 'block'; footer.style.display = 'block';
+                    document.body.style.background = '#FAFAFA';
+                } 
+                else {
+                    const view = document.getElementById('view-' + hash.replace('#', ''));
+                    if(view) view.classList.add('active');
+                    else document.getElementById('view-home').classList.add('active');
+                    
+                    nav.style.display = 'block'; footer.style.display = 'block';
+                    document.body.style.background = '#FAFAFA';
+                }
+                window.scrollTo(0, 0);
             }
 
-            // --- 5. ANIMATIONS & UI INTERACTIONS ---
+            window.addEventListener('hashchange', handleRoute);
+
+            // 4. UI INTERACTIONS (Nav hide, FAQs)
             let lastScrollY = window.scrollY;
             window.addEventListener('scroll', () => {
                 const navbar = document.getElementById('main-nav');
@@ -480,29 +421,10 @@
                 lastScrollY = window.scrollY;
             });
 
-            function initScrollReveals() {
-                const observer = new IntersectionObserver((entries, obs) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('is-visible');
-                            obs.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-                
-                // Remove visible class to restart animation on route change
-                document.querySelectorAll('.reveal-up').forEach(el => {
-                    el.classList.remove('is-visible');
-                    observer.observe(el);
-                });
-            }
-
-            // FAQ Accordion
             document.querySelectorAll('.faq-trigger').forEach(trigger => {
                 trigger.addEventListener('click', () => {
                     const content = trigger.nextElementSibling;
                     const isActive = trigger.classList.contains('active');
-                    
                     document.querySelectorAll('.faq-content').forEach(c => c.style.maxHeight = null);
                     document.querySelectorAll('.faq-trigger').forEach(t => t.classList.remove('active'));
                     
@@ -513,18 +435,69 @@
                 });
             });
 
-            // --- 6. ADMIN PANEL LOGIC ---
-            function showToast(msg) {
-                const toast = document.createElement('div');
-                toast.className = 'admin-toast';
-                toast.innerText = msg;
-                document.body.appendChild(toast);
-                setTimeout(() => toast.classList.add('show'), 10);
-                setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 3000);
+            // 5. ADMIN PANEL SYSTEM
+            let isAdminLoggedIn = false;
+            try { isAdminLoggedIn = sessionStorage.getItem('silfver_admin') === 'true'; } catch(e) {}
+
+            if (isAdminLoggedIn) showAdminDashboard();
+
+            document.getElementById('admin-login-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (document.getElementById('admin-user').value === 'Admin123' && document.getElementById('admin-pass').value === 'Admin123') {
+                    try { sessionStorage.setItem('silfver_admin', 'true'); } catch(e){}
+                    showAdminDashboard();
+                } else {
+                    document.getElementById('login-error').style.display = 'block';
+                }
+            });
+
+            document.getElementById('btn-logout').addEventListener('click', () => {
+                try { sessionStorage.removeItem('silfver_admin'); } catch(e){}
+                document.getElementById('admin-dashboard').style.display = 'none';
+                document.getElementById('login-container').style.display = 'flex';
+            });
+
+            function showAdminDashboard() {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('admin-dashboard').style.display = 'block';
+                renderAdminTable();
             }
 
-            const loginForm = document.getElementById('admin-login-form');
-            if (sessionStorage.getItem('silfver_admin') === 'true') showAdminDashboard();
+            function renderAdminTable() {
+                const tbody = document.getElementById('admin-table-body');
+                tbody.innerHTML = '';
+                products.forEach((p, idx) => {
+                    tbody.insertAdjacentHTML('beforeend', `
+                        <tr style="border-bottom: 1px solid #222;">
+                            <td style="padding: 16px 0;"><img src="${p.image}" class="admin-thumb"></td>
+                            <td style="padding: 16px 0;"><strong>${p.title}</strong></td>
+                            <td style="padding: 16px 0;">${p.price}</td>
+                            <td style="padding: 16px 0;"><button class="btn-sm btn-delete" style="background:#ef4444; color:white; border:none; padding:8px 16px; border-radius:6px; cursor:pointer;" onclick="deleteProduct(${idx})">Delete</button></td>
+                        </tr>
+                    `);
+                });
+            }
 
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault(
+            window.deleteProduct = function(index) {
+                if (confirm('Delete this product?')) {
+                    products.splice(index, 1);
+                    saveDatabase(); renderAdminTable(); renderStorefront();
+                }
+            };
+
+            document.getElementById('btn-add-product').addEventListener('click', () => {
+                const title = prompt("Product Title (e.g. Nova UI Kit):"); if (!title) return;
+                const price = prompt("Price (e.g. $49):");
+                const image = prompt("Image URL:", "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop");
+                
+                products.push({ id: Date.now().toString(), title, category: "Digital Asset", price: price || "$0", image });
+                saveDatabase(); renderAdminTable(); renderStorefront();
+            });
+
+            // Initialize
+            renderStorefront();
+            handleRoute();
+        });
+    </script>
+</body>
+</html>
