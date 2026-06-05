@@ -5,6 +5,19 @@ cursor.style.left=e.clientX+'px';
 cursor.style.top=e.clientY+'px';
 });
 
+// 6. Interactive cursor expansion on hover
+document.querySelectorAll('a, .card').forEach(item=>{
+item.addEventListener('mouseenter',()=>{
+cursor.style.width='48px';
+cursor.style.height='48px';
+});
+
+item.addEventListener('mouseleave',()=>{
+cursor.style.width='18px';
+cursor.style.height='18px';
+});
+});
+
 const observer=new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
