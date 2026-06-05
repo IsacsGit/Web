@@ -1,0 +1,164 @@
+
+:root{
+--bg:#f6f4f1;
+--text:#171717;
+--muted:#868293;
+--accent:#d5d4e5;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:Inter,sans-serif;
+background:var(--bg);
+color:var(--text);
+overflow-x:hidden;
+}
+
+.cursor{
+width:20px;
+height:20px;
+border:1px solid #000;
+border-radius:50%;
+position:fixed;
+pointer-events:none;
+z-index:9999;
+transform:translate(-50%,-50%);
+transition:.1s;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+padding:2rem 4rem;
+}
+
+nav a{
+color:inherit;
+text-decoration:none;
+}
+
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+background:
+radial-gradient(circle at top left,#d5d4e5 0%,transparent 40%),
+var(--bg);
+}
+
+.hero-content{
+margin:auto;
+width:min(1200px,90%);
+}
+
+.eyebrow{
+letter-spacing:.3rem;
+margin-bottom:1rem;
+color:var(--muted);
+}
+
+h1{
+font-size:clamp(4rem,10vw,10rem);
+line-height:.9;
+max-width:900px;
+}
+
+.lead{
+margin-top:2rem;
+font-size:1.2rem;
+max-width:600px;
+color:var(--muted);
+}
+
+section{
+padding:8rem 10%;
+}
+
+.manifesto h2,
+.archive h2,
+.contact h2{
+font-size:clamp(2rem,5vw,5rem);
+margin-bottom:1rem;
+}
+
+.collection{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:4rem;
+align-items:center;
+min-height:80vh;
+}
+
+.collection .image{
+height:600px;
+border-radius:30px;
+background:linear-gradient(135deg,#d5d4e5,#868293);
+}
+
+.collection h2{
+font-size:4rem;
+margin:.5rem 0;
+}
+
+.collection p{
+color:var(--muted);
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:2rem;
+margin-top:3rem;
+}
+
+.card{
+padding:3rem;
+background:white;
+border-radius:24px;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.contact{
+text-align:center;
+}
+
+.contact a{
+display:inline-block;
+margin-top:2rem;
+font-size:1.5rem;
+color:inherit;
+text-decoration:none;
+}
+
+.reveal{
+opacity:0;
+transform:translateY(60px);
+transition:1s ease;
+}
+
+.reveal.visible{
+opacity:1;
+transform:none;
+}
+
+@media(max-width:900px){
+.collection{
+grid-template-columns:1fr;
+}
+nav{
+padding:1.5rem;
+}
+}
